@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const isSearched = searchTerm => item =>
+item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 const list = [
   {
     title: "React",
@@ -26,19 +29,29 @@ class App extends Component {
 
   this.state = {
     list,
+    searchTerm: '',
   };
-  this.onDismiss = this.onDismiss.bind(this)
+  this.onDismiss = this.onDismiss.bind(this);
+  this.onSearchChange = this.onSearchChange.bind(this);
 }
 
-onDismiss(id) {
-  const updatedList = this.state.list.filter( item => item.objectID !== id)
+onDismiss = (id) => {
+  const updatedList = this.state.list.filter( item => item.objectID !== id);
   this.setState({list: updatedList})
+}
+
+onSearchChange(event) {
+  this.setState({ searchTerm: event.target.value})
 }
 
   render() {
     return (
       <div className="App">
-        {this.state.list.map(item =>
+        <form>
+          <input type='text'
+          onChange={this.onSearchChange}/>
+        </form>
+        {this.state.list.filter(isSearched(this.state.searchTerm)).map(item =>
           <div key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
@@ -47,7 +60,7 @@ onDismiss(id) {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
             <button
-              onClick= {()=> this.onDismiss(item.objectID)}
+              onClick={() => this.onDismiss(item.objectID)}
               type="button"
               >
                 Dismiss
@@ -59,5 +72,6 @@ onDismiss(id) {
     );
   }
 }
+
 
 export default App;
