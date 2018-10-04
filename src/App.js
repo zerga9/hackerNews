@@ -66,11 +66,14 @@ onSearchChange(event) {
           Search
         </Search>
       </div>
-        <Table
+      { result
+        ? <Table
           list={result.hits}
           pattern={searchTerm}
           onDismiss={this.onDismiss}
         />
+        : null
+      }
       </div>
     );
   }
