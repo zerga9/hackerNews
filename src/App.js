@@ -40,9 +40,12 @@ componentDidMount() {
   .catch(error => error);
 }
 
-onDismiss = (id) => {
-  const updatedList = this.state.list.filter( item => item.objectID !== id);
-  this.setState({list: updatedList})
+onDismiss(id) {
+const isNotId = item => item.objectID !== id;
+const updatedHits = this.state.result.hits.filter(isNotId);
+this.setState({
+result: {...this.state.result,  hits: updatedHits }
+});
 }
 
 onSearchChange(event) {
