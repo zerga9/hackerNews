@@ -25,7 +25,7 @@ class App extends Component {
 
 
   this.state = {
-    list: list,
+    list,
   };
 }
 
