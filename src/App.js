@@ -65,9 +65,7 @@ onSearchChange(event) {
 }
 
 
-class Search extends Component {
-  render() {
-    const { value, onChange, children } = this.props;
+const Search = ({ value, onChange, children }) => {
     return (
       <form>
         {children}
@@ -78,11 +76,9 @@ class Search extends Component {
       </form>
     );
   }
-}
 
-class Table extends Component {
-  render() {
-    const {onDismiss, pattern, list} = this.props;
+
+const Table = ({onDismiss, pattern, list}) => {
     return(
       <div>
       {list.filter(isSearched(pattern)).map(item =>
@@ -105,17 +101,14 @@ class Table extends Component {
       }
     </div>
   )
-
-}
 }
 
-class Button extends Component {
-  render() {
-    const {
+
+const Button = ( {
       onClick,
-      className,
-      children,
-    } = this.props;
+      className = '', //make classname optional
+      children
+    } ) => {
     return (
       <button
         onClick={onClick}
@@ -125,7 +118,7 @@ class Button extends Component {
       </button>
     );
   }
-}
+
 
 
 
