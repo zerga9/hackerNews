@@ -51,7 +51,9 @@ onSearchChange(event) {
         <Search
           value={searchTerm}
           onChange={this.onSearchChange}
-        />
+        >
+          Search
+        </Search>
         <Table
           list={list}
           pattern={searchTerm}
@@ -65,9 +67,10 @@ onSearchChange(event) {
 
 class Search extends Component {
   render() {
-    const {value, onChange} = this.props;
+    const { value, onChange, children } = this.props;
     return (
       <form>
+        {children}
         <input type='text'
           value={value}
         onChange={onChange}
@@ -90,12 +93,14 @@ class Table extends Component {
           <span>{item.author}</span>
           <span>{item.num_comments}</span>
           <span>{item.points}</span>
+          <span>
           <button
             onClick={() => onDismiss(item.objectID)}
             type="button"
             >
               Dismiss
             </button>
+          </span>
         </div>
       )
       }
